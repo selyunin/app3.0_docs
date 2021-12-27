@@ -8,6 +8,7 @@ Bosch application board 3.0 docs
 
     app30_main
     app30_sensor_boards
+    app30_connectors
 
 
 Indices and tables

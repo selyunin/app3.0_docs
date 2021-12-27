@@ -7,6 +7,9 @@ Bosch Application Board 3.0
 
 This is an **unofficial** documentation in order to get started with the Bosch Sensortec Application Board 3.0.
 
+---------------------------------
+0. Required equipment
+---------------------------------
 
 In order to get started one needs:
 
@@ -18,7 +21,5 @@ In order to get started one needs:
 
 * Linux / Windows computer;
 
----------------------------------
-0. Getting started plan
----------------------------------
+
 
