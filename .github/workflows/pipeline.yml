@@ -19,7 +19,7 @@ jobs:
     steps:
       - uses: einaregilsson/build-number@v3
         with:
-          token: ${{secrets.github_token}}
+          token: ${{ secrets.github_token }}
 
       - uses: actions/checkout@v2
         with:
@@ -58,45 +58,17 @@ jobs:
           cd ${GITHUB_WORKSPACE}
           pwd
           ls -la .
+          mkdir -pv app30_docs_src/docs/
           cp -r app30_docs_src/build/html/* app30_docs_src/docs
           touch app30_docs_src/docs/.nojekyll
           ls -la app30_docs_src/docs/
 
-      - name: Commit newly generated sources
-        uses: EndBug/add-and-commit@v7 # You can change this to use a specific version
+      - name: Deploy to GitHub actions
+        uses: JamesIves/github-pages-deploy-action@4.1.7
         with:
-          # The arguments for the `git add` command (see the paragraph below for more info)
-          # Default: '.'
-          add: '.'
+          branch: gh-pages # The branch the action should deploy to.
+          folder: app30_docs_src/docs/ # The folder the action should deploy.
+          token: ${{ secrets.REPO_ACCESS_TOKEN }}
+          commit-message: 'v${{ env.DOCS_VERSION }} --force'
 
-          # Name of the branch to use, if different from the one that triggered the workflow
-          # Default: the branch that triggered the run
-          branch: gh-pages
 
-          # The local path to the directory where your repository is located. You should use actions/checkout first to set it up
-          # Default: '.'
-          cwd: './app30_docs_gen'
-
-          # The message for the commit
-          # Default: 'Commit from GitHub Actions (name of the workflow)'
-          message: 'Docs v${{ env.DOCS_VERSION }}'
-
-          # The flag used on the pull strategy. Use NO-PULL to avoid the action pulling at all.
-          # Default: '--no-rebase'
-          pull: ''
-
-          # Whether to push the commit and, if any, its tags to the repo. It can also be used to set the git push arguments (see the paragraph below for more info)
-          # Default: true
-          push: true
-
-          # The arguments for the `git rm` command (see the paragraph below for more info)
-          # Default: ''
-          remove: ''
-
-          # Whether to use the --signoff option on `git commit` (only `true` and `false` are accepted)
-          # Default: false
-          signoff: true
-
-          # Arguments for the git tag command (the tag name always needs to be the first word not preceded by an hyphen)
-          # Default: ''
-          tag: 'v${{ env.DOCS_VERSION }} --force'
