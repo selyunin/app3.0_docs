@@ -48,15 +48,23 @@ jobs:
 
       # Runs a set of commands using the runners shell
       - name: Build documentation
+        shell: bash
         run: |
           ls -la .
           pwd
           ls -la app30_docs_src
           cd app30_docs_src && sphinx-build -b html source build/html
-          rm -rf ../app30_docs_gen/docs
-          mkdir -p ../app30_docs_gen/docs
-          cp -r build/html/* ../app30_docs_gen/docs
-          cd ../app30_docs_gen/docs && touch .nojekyll && cd ..
+
+      - name: Update generated HTML files
+        shell: bash
+        run: |
+          echo "GitHub Workspace: $GITHUB_WORKSPACE"
+          cd ${GITHUB_WORKSPACE}
+          pwd
+          ls -la .
+          cp -r app30_docs_src/build/html/* app30_docs_gen/docs
+          touch app30_docs_gen/docs/.nojekyll
+          ls -la app30_docs_gen/docs/
 
       - name: Commit newly generated sources
         uses: EndBug/add-and-commit@v7 # You can change this to use a specific version
