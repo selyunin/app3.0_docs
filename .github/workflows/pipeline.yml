@@ -22,7 +22,7 @@ jobs:
         with:
           repository: selyunin/app3.0_docs
           path: 'app30_docs_src'
-          ref: ''
+          ref: ${{ env.GITHUB_SHA }}
           token: ${{ secrets.REPO_ACCESS_TOKEN }}
 
       - uses: actions/checkout@v2
