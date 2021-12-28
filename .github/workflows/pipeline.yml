@@ -1,6 +1,13 @@
 name: Pipeline
 
-on: [push]
+on:
+  push:
+    branches:
+      - master
+      - main
+      - feature/**
+    branches-ignore:
+      - gh-pages
 
 jobs:
   build_job:
