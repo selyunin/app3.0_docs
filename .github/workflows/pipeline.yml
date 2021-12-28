@@ -25,6 +25,7 @@ jobs:
         with:
           repository: selyunin/app3.0_docs
           path: 'app30_docs_src'
+          fetch-depth: 0
           ref: ''
           token: ${{ secrets.REPO_ACCESS_TOKEN }}
 
