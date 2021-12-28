@@ -30,6 +30,9 @@ BST Board App Board 3.0 connectors
 This asymmetric 7-9 pin connector is used to plug-in the shuttle sensor boards into the application board 3.0.
 Asymmetry serves the purpose to eliminate the possibility of wrong connection.
 
+The value of VDD is either 0V, 1.8V, or 2.8V. The value of the VDDIO is either 0V or 1.8V.
+The communication interface with the sensor can be selected between SPI or I2C.
+
 
 .. table:: **BST_SHUTTLE_BOARD_CONNECTOR**
 
