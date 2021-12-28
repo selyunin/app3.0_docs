@@ -25,14 +25,7 @@ jobs:
         with:
           repository: selyunin/app3.0_docs
           path: 'app30_docs_src'
-          ref: ${{ env.GITHUB_SHA }}
-          token: ${{ secrets.REPO_ACCESS_TOKEN }}
-
-      - uses: actions/checkout@v2
-        with:
-          repository: selyunin/app3.0_docs
-          path: 'app30_docs_gen'
-          ref: gh-pages
+          ref: ''
           token: ${{ secrets.REPO_ACCESS_TOKEN }}
 
       - name: Read version number
@@ -65,9 +58,9 @@ jobs:
           cd ${GITHUB_WORKSPACE}
           pwd
           ls -la .
-          cp -r app30_docs_src/build/html/* app30_docs_gen/docs
-          touch app30_docs_gen/docs/.nojekyll
-          ls -la app30_docs_gen/docs/
+          cp -r app30_docs_src/build/html/* app30_docs_src/docs
+          touch app30_docs_src/docs/.nojekyll
+          ls -la app30_docs_src/docs/
 
       - name: Commit newly generated sources
         uses: EndBug/add-and-commit@v7 # You can change this to use a specific version
