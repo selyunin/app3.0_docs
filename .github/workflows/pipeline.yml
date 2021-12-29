@@ -59,8 +59,8 @@ jobs:
           cd ${GITHUB_WORKSPACE}
           pwd
           ls -la .
-          mkdir -pv app30_docs_src/docs
           cd app30_docs_src && git checkout gh-pages && cd ..
+          rm -rf app30_docs_src/docs && mkdir -pv app30_docs_src/docs
           cp -r app30_docs_src/build/html/* app30_docs_src/docs
           touch app30_docs_src/docs/.nojekyll
           ls -la app30_docs_src/docs/
