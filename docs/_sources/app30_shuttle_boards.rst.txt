@@ -1,4 +1,4 @@
-Sensor Boards for BST Board 3.0
+Shuttle Boards for BST Board 3.0
 ################################
 
 In order to detect what sensor board is currently connected to the application

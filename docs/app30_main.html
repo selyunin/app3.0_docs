@@ -13,6 +13,7 @@
   
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/colors.css" type="text/css" />
 
   
   
@@ -38,7 +39,7 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Sensor Boards for BST Board 3.0" href="app30_sensor_boards.html" />
+    <link rel="next" title="Shuttle Boards for BST Board 3.0" href="app30_shuttle_boards.html" />
     <link rel="prev" title="Bosch application board 3.0 docs" href="index.html" /> 
 </head>
 
@@ -87,12 +88,14 @@
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Bosch Application Board 3.0</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#required-equipment">0. Required equipment</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#application-board-3-0-hw">1. Application Board 3.0 HW</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#required-equipment">Required equipment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#application-board-3-0-overview">Application board 3.0 overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#application-board-3-0-hardware-overview">1. Application Board 3.0 hardware overview</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="app30_sensor_boards.html">Sensor Boards for BST Board 3.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="app30_shuttle_boards.html">Shuttle Boards for BST Board 3.0</a></li>
 <li class="toctree-l1"><a class="reference internal" href="app30_connectors.html">Connector pin-out for Bosch Application Board 3.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="firmware_update.html">Firmware update with DFU</a></li>
 </ul>
 
             
@@ -165,29 +168,44 @@
 <ul class="simple">
 <li><p><a class="reference internal" href="#bosch-application-board-3-0" id="id1">Bosch Application Board 3.0</a></p>
 <ul>
-<li><p><a class="reference internal" href="#required-equipment" id="id2">0. Required equipment</a></p></li>
-<li><p><a class="reference internal" href="#application-board-3-0-hw" id="id3">1. Application Board 3.0 HW</a></p></li>
+<li><p><a class="reference internal" href="#required-equipment" id="id2">Required equipment</a></p></li>
+<li><p><a class="reference internal" href="#application-board-3-0-overview" id="id3">Application board 3.0 overview</a></p></li>
+<li><p><a class="reference internal" href="#application-board-3-0-hardware-overview" id="id4">1. Application Board 3.0 hardware overview</a></p></li>
 </ul>
 </li>
 </ul>
 </div>
 <p>This is an <strong>unofficial</strong>, <strong>open source</strong>, <strong>community written</strong> documentation
-in order to get started with the <a class="reference external" href="https://www.bosch-sensortec.com/software-tools/tools/application-board-3-0/">Bosch Sensortec Application Board 3.0</a>.</p>
+in order to get started with the <a class="reference external" href="https://www.bosch-sensortec.com/software-tools/tools/application-board-3-0/">Bosch Sensortec Application Board 3.0</a>.
+The board is platform for evaluating the Bosch Sensortec internal sensors,
+like IMUs, magnetometers, etc.</p>
 <div class="section" id="required-equipment">
-<h2><a class="toc-backref" href="#table-of-contents">0. Required equipment</a><a class="headerlink" href="#required-equipment" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#table-of-contents">Required equipment</a><a class="headerlink" href="#required-equipment" title="Permalink to this headline">¶</a></h2>
 <p>In order to get started one needs:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://www.bosch-sensortec.com/software-tools/tools/application-board-3-0/">Bosch Sensortec Application Board 3.0</a>;</p></li>
-<li><p>Board sensor plug-in board (e.g. BMI088);</p></li>
+<li><p>Shuttle board (e.g. <a class="reference external" href="https://www.bosch-sensortec.com/media/boschsensortec/downloads/shuttle_board_flyer/application_board_3_1/bst-bmi088-sf000.pdf">BMI088</a>);</p></li>
 <li><p>Micro-USB cable;</p></li>
 <li><p>Linux / Windows computer with USB port;</p></li>
 </ul>
 </div>
-<div class="section" id="application-board-3-0-hw">
-<h2><a class="toc-backref" href="#table-of-contents">1. Application Board 3.0 HW</a><a class="headerlink" href="#application-board-3-0-hw" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="application-board-3-0-overview">
+<h2><a class="toc-backref" href="#table-of-contents">Application board 3.0 overview</a><a class="headerlink" href="#application-board-3-0-overview" title="Permalink to this headline">¶</a></h2>
+<p>One can conceptually split the communication with a digital sensor (e.g. IMU) into the following phases:
+* initialization phase, where a sensor is configured into an appropriate operation regime,
+* measurement phase, where a sensor provides a digital representation (bit-vector), and
+physical value of interest (e.g. angular velocity) can be restored with a known conversion formula.</p>
+<p>The <a class="reference external" href="https://www.bosch-sensortec.com/software-tools/tools/application-board-3-0/">Bosch Sensortec Application Board 3.0</a> consists of (1) micro-controller (MCU), (2) power circuitry,
+(3) flash memory, and other components which we omit now for clarity.
+Micro-controller communicates with sensors both using SPI and I2C, activates or deactivates the sensor power.</p>
+</div>
+<div class="section" id="application-board-3-0-hardware-overview">
+<h2><a class="toc-backref" href="#table-of-contents">1. Application Board 3.0 hardware overview</a><a class="headerlink" href="#application-board-3-0-hardware-overview" title="Permalink to this headline">¶</a></h2>
 <p>The <a class="reference external" href="https://www.bosch-sensortec.com/software-tools/tools/application-board-3-0/">Bosch Sensortec Application Board 3.0</a> uses the following components:</p>
 <ul class="simple">
-<li><p>NINA-B302</p></li>
+<li><p><a class="reference external" href="https://www.u-blox.com/en/product/nina-b30-series-open-cpu-0">NINA-B302</a>, a stand-alone Bluetooth 5 low energy module with antenna from <a class="reference external" href="https://www.u-blox.com/en">u-blox</a>.
+The module is a small PCB where the <a class="reference external" href="https://www.nordicsemi.com/Products/nRF52840">nRF52840</a> SoC from <a class="reference external" href="https://www.nordicsemi.com/">Nordic Semiconductor</a> (ARM Cortex M4 MCU + FPU)
+is placed together with antenna, the so-called PIFA, Planar Inverted F-Antenna;</p></li>
 </ul>
 </div>
 </div>
@@ -198,7 +216,7 @@ in order to get started with the <a class="reference external" href="https://www
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="app30_sensor_boards.html" class="btn btn-neutral float-right" title="Sensor Boards for BST Board 3.0" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="app30_shuttle_boards.html" class="btn btn-neutral float-right" title="Shuttle Boards for BST Board 3.0" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
         <a href="index.html" class="btn btn-neutral float-left" title="Bosch application board 3.0 docs" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
@@ -206,7 +224,7 @@ in order to get started with the <a class="reference external" href="https://www
 
   <div role="contentinfo">
     <p>
-        &#169; Copyright 2021, Selyunin.
+        &#169; Copyright 2022, Dr. Selyunin.
 
     </p>
   </div> 

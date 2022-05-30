@@ -1,0 +1,299 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Firmware update with DFU &mdash; app3.0_docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/colors.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Connector pin-out for Bosch Application Board 3.0" href="app30_connectors.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> app3.0_docs
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="app30_main.html">Bosch Application Board 3.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="app30_shuttle_boards.html">Shuttle Boards for BST Board 3.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="app30_connectors.html">Connector pin-out for Bosch Application Board 3.0</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Firmware update with DFU</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#bst-board-app-development-desktop-firmware">BST Board App Development Desktop Firmware</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#application-part-of-firmware">Application part of firmware</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bootloader-part-of-firmware">Bootloader part of firmware</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#activate-bootloader-mode">Activate bootloader mode</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#usb-configuration">USB configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#application-firmware-configuration">Application firmware configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bootloader-firmware-configuration">Bootloader firmware configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#dfu-firmware-update">DFU firmware update</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">app3.0_docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Firmware update with DFU</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="firmware-update-with-dfu">
+<h1><a class="toc-backref" href="#table-of-contents">Firmware update with DFU</a><a class="headerlink" href="#firmware-update-with-dfu" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="table-of-contents">
+<p class="topic-title">Table of Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#firmware-update-with-dfu" id="id1">Firmware update with DFU</a></p>
+<ul>
+<li><p><a class="reference internal" href="#bst-board-app-development-desktop-firmware" id="id2">BST Board App Development Desktop Firmware</a></p>
+<ul>
+<li><p><a class="reference internal" href="#application-part-of-firmware" id="id3">Application part of firmware</a></p></li>
+<li><p><a class="reference internal" href="#bootloader-part-of-firmware" id="id4">Bootloader part of firmware</a></p>
+<ul>
+<li><p><a class="reference internal" href="#activate-bootloader-mode" id="id5">Activate bootloader mode</a></p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#usb-configuration" id="id6">USB configuration</a></p>
+<ul>
+<li><p><a class="reference internal" href="#application-firmware-configuration" id="id7">Application firmware configuration</a></p></li>
+<li><p><a class="reference internal" href="#bootloader-firmware-configuration" id="id8">Bootloader firmware configuration</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#dfu-firmware-update" id="id9">DFU firmware update</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="bst-board-app-development-desktop-firmware">
+<h2><a class="toc-backref" href="#table-of-contents">BST Board App Development Desktop Firmware</a><a class="headerlink" href="#bst-board-app-development-desktop-firmware" title="Permalink to this headline">¶</a></h2>
+<p>The application board 3.0 can be programmed with different firmware.
+The default firmware programmed to the application board 3.0
+is intended to be used with the “Development Desktop V2.0”
+Windows desktop software provided by Bosch Sensortec.</p>
+<p>The default firmware consists of two parts:</p>
+<ol class="arabic simple">
+<li><p>the application part and</p></li>
+<li><p>the bootloader part.</p></li>
+</ol>
+<div class="section" id="application-part-of-firmware">
+<h3><a class="toc-backref" href="#table-of-contents">Application part of firmware</a><a class="headerlink" href="#application-part-of-firmware" title="Permalink to this headline">¶</a></h3>
+<p>The application firmware controls the pins of the shuttle board connector, enables
+power supply, configures whether SPI or I2C protocol shall be used, configures the sensor on the shuttle board
+in an appropriate regime, grabs the data from the sensor and transfers it over the USB interface.
+When the application firmware is running the MCU LED D1 turns <span class="red">RED</span>.
+The application firmware starts by default when the board is powered ON.</p>
+</div>
+<div class="section" id="bootloader-part-of-firmware">
+<h3><a class="toc-backref" href="#table-of-contents">Bootloader part of firmware</a><a class="headerlink" href="#bootloader-part-of-firmware" title="Permalink to this headline">¶</a></h3>
+<p>The bootloader part of firmware is used to update the application firmware with a new version.
+When the board in the bootloader mode, the MCU LED D1 turns <span class="blue">BLUE</span>.
+To put the board into the bootloader mode the board shall be powered with the T2 button pressed.
+The <code class="docutils literal notranslate"><span class="pre">T2</span></code> button is connected to <code class="docutils literal notranslate"><span class="pre">SWITCH2</span></code> signal of the <a class="reference external" href="https://www.bosch-sensortec.com/software-tools/tools/application-board-3-0/">Application Board 3.0</a>, which in turn <code class="docutils literal notranslate"><span class="pre">GPIO_7</span></code> of the
+<a class="reference external" href="https://www.u-blox.com/en/product/nina-b30-series-open-cpu-0">NINA-B302</a>, the <code class="docutils literal notranslate"><span class="pre">P0.25</span></code> pin of the <a class="reference external" href="https://www.nordicsemi.com/Products/nRF52840">nRF52840</a></p>
+<div class="section" id="activate-bootloader-mode">
+<h4><a class="toc-backref" href="#table-of-contents">Activate bootloader mode</a><a class="headerlink" href="#activate-bootloader-mode" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p>power the board OFF by turning ON/OFF power switch to OFF;</p></li>
+<li><p>press the <code class="docutils literal notranslate"><span class="pre">T2</span></code> button;</p></li>
+<li><p>with the <code class="docutils literal notranslate"><span class="pre">T2</span></code> button pressed, turn the board ON by turning the ON/OFF power switch to ON;</p></li>
+<li><p>observe the <span class="blue">BLUE</span> LED turns ON. If the MCU D1 LED does not turn <span class="blue">BLUE</span>, this means bootloader
+is not active, repeat the process.</p></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="usb-configuration">
+<h2><a class="toc-backref" href="#table-of-contents">USB configuration</a><a class="headerlink" href="#usb-configuration" title="Permalink to this headline">¶</a></h2>
+<p>Depending on operation mode of the device (application, bootloader), the <a class="reference external" href="https://www.bosch-sensortec.com/software-tools/tools/application-board-3-0/">Application Board 3.0</a> presents itself
+as different device on the USB bus, with different vendor and product IDs.</p>
+<div class="section" id="application-firmware-configuration">
+<h3><a class="toc-backref" href="#table-of-contents">Application firmware configuration</a><a class="headerlink" href="#application-firmware-configuration" title="Permalink to this headline">¶</a></h3>
+<p>In the application mode, the device present itself with “Thesycon Systemsoftware &amp; Consulting GmbH”,
+VID=108c, PID=ab3d, Class=CDC Data, 12M.</p>
+</div>
+<div class="section" id="bootloader-firmware-configuration">
+<h3><a class="toc-backref" href="#table-of-contents">Bootloader firmware configuration</a><a class="headerlink" href="#bootloader-firmware-configuration" title="Permalink to this headline">¶</a></h3>
+<p>In the bootloader mode, the device present itself with “Robert Bosch GmbH”,
+VID=152a, PID=80c0, Class=Application Specific Interface, 12M.</p>
+</div>
+</div>
+<div class="section" id="dfu-firmware-update">
+<h2><a class="toc-backref" href="#table-of-contents">DFU firmware update</a><a class="headerlink" href="#dfu-firmware-update" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="app30_connectors.html" class="btn btn-neutral float-left" title="Connector pin-out for Bosch Application Board 3.0" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2022, Dr. Selyunin.
+
+    </p>
+  </div> 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
