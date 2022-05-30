@@ -16,7 +16,7 @@
 # -- Project information -----------------------------------------------------
 
 project = 'app3.0_docs'
-copyright = '2021, Selyunin'
+copyright = '2022, Dr. Selyunin'
 author = 'Dr. Konstantin Selyunin'
 
 
@@ -54,3 +54,12 @@ html_show_sourcelink = False
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
+
+rst_prolog = """
+.. include:: <s5defs.txt>
+
+"""
+
+html_css_files = [
+    'colors.css',
+]

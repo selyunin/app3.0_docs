@@ -7,8 +7,9 @@ Bosch application board 3.0 docs
     :caption: Contents:
 
     app30_main
-    app30_sensor_boards
+    app30_shuttle_boards
     app30_connectors
+    firmware_update
 
 
 Indices and tables

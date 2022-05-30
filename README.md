@@ -1,4 +1,4 @@
-# Application Board 3.0 Documentation
+# (Unofficial) Documentation for Bosch Sensortec Application Board 3.0
 
 This repo holds source and generated **unofficial**, **open-source**, **community-written** web documentation for the
 [Bosch Sensortec Application Board 3.0](https://www.bosch-sensortec.com/software-tools/tools/application-board-3-0/) 
@@ -7,12 +7,12 @@ evaluation board.
 The documentation is available as [`github pages`](https://pages.github.com/) 
 and is updated via [`github actions`](https://github.com/features/actions). 
 We use [sphinx](https://www.sphinx-doc.org/en/master/) 
-as documentation engine.
+as a documentation engine.
 The documentation is written in [`reStructuredText`](https://docutils.sourceforge.io/rst.html) 
 and converted to HTML with `python`.
 To obtain its familiar *look-and-feel*, we use the [sphinx_rtd_theme](https://github.com/readthedocs/sphinx_rtd_theme).
 
-Access the generated documentation with the following link:
+Access the HTML pages with the following link:
 
 [**https://selyunin.github.io/app3.0_docs/**](https://selyunin.github.io/app3.0_docs/)
 
