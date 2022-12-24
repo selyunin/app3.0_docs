@@ -9,6 +9,7 @@ Bosch application board 3.0 docs
     app30_main
     app30_shuttle_boards
     app30_connectors
+    app30_debugging
     firmware_update
 
 
