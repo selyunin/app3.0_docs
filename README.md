@@ -1,6 +1,6 @@
 # (Unofficial) Documentation for Bosch Sensortec Application Board 3.0
 
-This repo holds source and generated **unofficial**, **open-source**, **community-written** web documentation for the
+The repo holds source and generated **unofficial**, **open-source**, **community-written** web documentation for the
 [Bosch Sensortec Application Board 3.0](https://www.bosch-sensortec.com/software-tools/tools/application-board-3-0/) 
 evaluation board.
 
@@ -21,17 +21,32 @@ Refresh the page / try using different browser if you think you access the old v
 
 ## Building documentation locally
 
-In order to build the documentation locally, install `sphinx` and the `sphinx_rtd_theme`:
+To build the documentation locally, install
+[`sphinx`](https://www.sphinx-doc.org/en/master/) and the 
+[`sphinx_rtd_theme`](https://pypi.org/project/sphinx-rtd-theme/):
 ```sh
-pip install sphinx sphinx_rtd_theme
+pip install sphinx sphinx-rtd-theme
 ```
 
-Use sphinx to build the HTML documentation, and spawn the `http.server` to view it locally:
+Use `sphinx` to generate documentation from `*.rst` files:
+* build HTML pages:
+```
+python -m sphinx -b html source out/html
+```
+
+* build LaTeX pages:
+```
+python -m sphinx -b latex source out/latex
+```
+
+When the HTML pages are generated, 
+spawn the `http.server` to view the pages locally:
 ```sh
-cd generated_html_docs_folder
+cd /path/to/generated/html/
 python -m http.server 8080
 ```
 
+Go to the `localhost:8080` in browser and read the pages.
 
 ## Maintainer
 

@@ -21,7 +21,7 @@ jobs:
         with:
           token: ${{ secrets.github_token }}
 
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           repository: selyunin/app3.0_docs
           path: 'app30_docs_src'
@@ -36,9 +36,7 @@ jobs:
         # Note the current convention is to use the -S and -B options here to specify source
         # and build directories, but this is only available with CMake 3.13 and higher.
         run: |
-          VERSION_MAJOR=`sed -n '1p' app30_docs_src/VERSION | grep -oEi ":.*" | grep -oEi "[[:alnum:]]+"`
-          VERSION_MINOR=`sed -n '2p' app30_docs_src/VERSION | grep -oEi ":.*" | grep -oEi "[[:alnum:]]+"`
-          DOCS_VERSION=${MAJOR}.${MINOR}.${BUILD_NUMBER}
+          source .env
           echo "VERSION_MAJOR=${VERSION_MAJOR}" >> $GITHUB_ENV
           echo "VERSION_MINOR=${VERSION_MINOR}" >> $GITHUB_ENV
           echo "DOCS_VERSION=${VERSION_MAJOR}.${VERSION_MINOR}.${BUILD_NUMBER}" >> $GITHUB_ENV

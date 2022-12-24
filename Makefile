@@ -1,20 +1,29 @@
-# Minimal makefile for Sphinx documentation
-#
+SHELL := /bin/bash
 
-# You can set these variables from the command line, and also
-# from the environment for the first two.
-SPHINXOPTS    ?=
-SPHINXBUILD   ?= sphinx-build
-SOURCEDIR     = source
-BUILDDIR      = docs
+.DEFAULT_GOAL := help
 
-# Put it first so that "make" without argument is like "make help".
-help:
-	@$(SPHINXBUILD) -M help "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
+include .env
 
-.PHONY: help Makefile
+.PHONY: help
+help: ## Display this help
+	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z0-9_-]+:.*?## / {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
 
-# Catch-all target: route all unknown targets to Sphinx using the new
-# "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).
-%: Makefile
-	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
+.PHONY: build
+build: ## Build the docker image
+	docker compose build python-sphinx-rtd
+
+.PHONY: shell
+shell:  ## Run shell inside a Linux container
+	docker compose run --rm python-sphinx-rtd /bin/bash
+
+.PHONY: generate-html-docs
+generate-html-docs: ## Compile natively with cmake and create a bundle
+	docker compose run --rm generate-html-docs
+
+.PHONY: generate-latex-docs
+generate-latex-docs:  ## Run the application natively on Linux platform
+	docker compose run --rm generate-latex-docs
+
+.PHONY: serve-html-docs
+serve-html-docs:  ## Run the application natively on Linux platform
+	docker compose run --rm serve-html-docs

@@ -1,0 +1,46 @@
+version: "3.6"
+
+services:
+
+  python-sphinx-rtd: &python-sphinx-rtd
+    image: ${DOCKER_IMAGE}:${VERSION}
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: python-sphinx-rtd
+    volumes:
+      - .:/repo
+      - /dev:/dev
+      - /tmp:/tmp
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - /var/run/dbus:/var/run/dbus
+      - /run/udev:/run/udev:ro
+    env_file:
+      - ./.env
+    working_dir: /repo
+    ipc: host
+    pid: host
+    network_mode: host
+    privileged: true
+    ports:
+      - "8080:8080"
+    environment:
+      - HOSTUSER=$USER
+      - DISPLAY=$DISPLAY
+      - RUNS_INSIDE_DOCKER=1
+
+  generate-html-docs:
+    <<: *python-sphinx-rtd
+    command: >
+      bash -c "python -m sphinx -b html source out_docker/html/"
+
+  generate-latex-docs:
+    <<: *python-sphinx-rtd
+    command: >
+      bash -c "python -m sphinx -b latex source out_docker/latex/"
+
+  serve-html-docs:
+    <<: *python-sphinx-rtd
+    command: >
+      bash -c "cd out_docker/html/ &&
+               python -m http.server 8080"
