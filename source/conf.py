@@ -16,13 +16,14 @@
 # -- Project information -----------------------------------------------------
 
 project = 'app3.0_docs'
-copyright = '2022, Dr. Selyunin'
+copyright = '2023, Dr. Selyunin'
 author = 'Dr. Konstantin Selyunin'
 
 
 # -- General configuration ---------------------------------------------------
 html_show_copyright = True
 html_show_sphinx = False
+html_favicon = '_images/favicon.ico'
 numfig = True
 
 # Add any Sphinx extension module names here, as strings. They can be
