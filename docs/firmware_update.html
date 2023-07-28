@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Firmware update with DFU &mdash; app3.0_docs  documentation</title>
+  <title>Firmware update &mdash; app3.0_docs  documentation</title>
   
 
   
@@ -16,6 +16,8 @@
   <link rel="stylesheet" href="_static/colors.css" type="text/css" />
 
   
+  
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
   
 
   
@@ -39,6 +41,7 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Python package coinespy" href="app30_coinespy.html" />
     <link rel="prev" title="Firmware debugging for Application board 3.0" href="app30_debugging.html" /> 
 </head>
 
@@ -90,11 +93,15 @@
 <li class="toctree-l1"><a class="reference internal" href="app30_shuttle_boards.html">Shuttle Boards for BST Board 3.0</a></li>
 <li class="toctree-l1"><a class="reference internal" href="app30_connectors.html">Connector pin-out for Bosch Application Board 3.0</a></li>
 <li class="toctree-l1"><a class="reference internal" href="app30_debugging.html">Firmware debugging for Application board 3.0</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Firmware update with DFU</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Firmware update</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#bst-board-app-development-desktop-firmware">BST Board App Development Desktop Firmware</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#application-part-of-firmware">Application part of firmware</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#bootloader-part-of-firmware">Bootloader part of firmware</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#activate-bootloader-mode">Activate bootloader mode</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#mtp-part-of-firmware">MTP part of firmware</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#activate-mtp-mode">Activate MTP mode</a></li>
 </ul>
 </li>
 </ul>
@@ -102,11 +109,15 @@
 <li class="toctree-l2"><a class="reference internal" href="#usb-configuration">USB configuration</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#application-firmware-configuration">Application firmware configuration</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#bootloader-firmware-configuration">Bootloader firmware configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mtp-firmware-configuration">MTP firmware configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#usb-speed">USB speed</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#firmware-modes-with-app-switch">Firmware modes with app_switch</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#dfu-firmware-update">DFU firmware update</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="app30_coinespy.html">Python package <code class="docutils literal notranslate"><span class="pre">coinespy</span></code></a></li>
 </ul>
 
             
@@ -155,7 +166,7 @@
     
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>Firmware update with DFU</li>
+      <li>Firmware update</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -172,12 +183,12 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="firmware-update-with-dfu">
-<h1><a class="toc-backref" href="#table-of-contents">Firmware update with DFU</a><a class="headerlink" href="#firmware-update-with-dfu" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="firmware-update">
+<h1><a class="toc-backref" href="#table-of-contents">Firmware update</a><a class="headerlink" href="#firmware-update" title="Permalink to this headline">¶</a></h1>
 <div class="contents topic" id="table-of-contents">
 <p class="topic-title">Table of Contents</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="#firmware-update-with-dfu" id="id1">Firmware update with DFU</a></p>
+<li><p><a class="reference internal" href="#firmware-update" id="id1">Firmware update</a></p>
 <ul>
 <li><p><a class="reference internal" href="#bst-board-app-development-desktop-firmware" id="id2">BST Board App Development Desktop Firmware</a></p>
 <ul>
@@ -187,15 +198,23 @@
 <li><p><a class="reference internal" href="#activate-bootloader-mode" id="id5">Activate bootloader mode</a></p></li>
 </ul>
 </li>
-</ul>
-</li>
-<li><p><a class="reference internal" href="#usb-configuration" id="id6">USB configuration</a></p>
+<li><p><a class="reference internal" href="#mtp-part-of-firmware" id="id6">MTP part of firmware</a></p>
 <ul>
-<li><p><a class="reference internal" href="#application-firmware-configuration" id="id7">Application firmware configuration</a></p></li>
-<li><p><a class="reference internal" href="#bootloader-firmware-configuration" id="id8">Bootloader firmware configuration</a></p></li>
+<li><p><a class="reference internal" href="#activate-mtp-mode" id="id7">Activate MTP mode</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#dfu-firmware-update" id="id9">DFU firmware update</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#usb-configuration" id="id8">USB configuration</a></p>
+<ul>
+<li><p><a class="reference internal" href="#application-firmware-configuration" id="id9">Application firmware configuration</a></p></li>
+<li><p><a class="reference internal" href="#bootloader-firmware-configuration" id="id10">Bootloader firmware configuration</a></p></li>
+<li><p><a class="reference internal" href="#mtp-firmware-configuration" id="id11">MTP firmware configuration</a></p></li>
+<li><p><a class="reference internal" href="#usb-speed" id="id12">USB speed</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#firmware-modes-with-app-switch" id="id13">Firmware modes with app_switch</a></p></li>
+<li><p><a class="reference internal" href="#dfu-firmware-update" id="id14">DFU firmware update</a></p></li>
 </ul>
 </li>
 </ul>
@@ -204,12 +223,13 @@
 <h2><a class="toc-backref" href="#table-of-contents">BST Board App Development Desktop Firmware</a><a class="headerlink" href="#bst-board-app-development-desktop-firmware" title="Permalink to this headline">¶</a></h2>
 <p>The application board 3.0 can be programmed with different firmware.
 The default firmware programmed to the application board 3.0
-is intended to be used with the “Development Desktop V2.0”
+is intended to be used with the “<a class="reference external" href="https://www.bosch-sensortec.com/software-tools/tools/development-desktop-software/">Development Desktop V2.0</a>”
 Windows desktop software provided by Bosch Sensortec.</p>
-<p>The default firmware consists of two parts:</p>
+<p>The default firmware consists of three parts:</p>
 <ol class="arabic simple">
 <li><p>the application part and</p></li>
-<li><p>the bootloader part.</p></li>
+<li><p>the bootloader part,</p></li>
+<li><p>the MTP (media transfer protocol) part</p></li>
 </ol>
 <div class="section" id="application-part-of-firmware">
 <h3><a class="toc-backref" href="#table-of-contents">Application part of firmware</a><a class="headerlink" href="#application-part-of-firmware" title="Permalink to this headline">¶</a></h3>
@@ -221,11 +241,11 @@ The application firmware starts by default when the board is powered ON.</p>
 </div>
 <div class="section" id="bootloader-part-of-firmware">
 <h3><a class="toc-backref" href="#table-of-contents">Bootloader part of firmware</a><a class="headerlink" href="#bootloader-part-of-firmware" title="Permalink to this headline">¶</a></h3>
-<p>The bootloader part of firmware is used to update the application firmware with a new version.
+<p>The bootloader part of firmware is used to upgrade the application firmware with a new version.
 When the board in the bootloader mode, the MCU LED D1 turns <span class="blue">BLUE</span>.
 To put the board into the bootloader mode the board shall be powered with the T2 button pressed.
 The <code class="docutils literal notranslate"><span class="pre">T2</span></code> button is connected to <code class="docutils literal notranslate"><span class="pre">SWITCH2</span></code> signal of the <a class="reference external" href="https://www.bosch-sensortec.com/software-tools/tools/application-board-3-0/">Application Board 3.0</a>, which in turn <code class="docutils literal notranslate"><span class="pre">GPIO_7</span></code> of the
-<a class="reference external" href="https://www.u-blox.com/en/product/nina-b30-series-open-cpu-0">NINA-B302</a>, the <code class="docutils literal notranslate"><span class="pre">P0.25</span></code> pin of the <a class="reference external" href="https://www.nordicsemi.com/Products/nRF52840">nRF52840</a></p>
+<a class="reference external" href="https://www.u-blox.com/en/product/nina-b30-series-open-cpu-0">NINA-B302</a>, the <code class="docutils literal notranslate"><span class="pre">P0.25</span></code> pin of the <a class="reference external" href="https://www.nordicsemi.com/Products/nRF52840">nRF52840</a>.</p>
 <div class="section" id="activate-bootloader-mode">
 <h4><a class="toc-backref" href="#table-of-contents">Activate bootloader mode</a><a class="headerlink" href="#activate-bootloader-mode" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
@@ -237,6 +257,25 @@ is not active, repeat the process.</p></li>
 </ul>
 </div>
 </div>
+<div class="section" id="mtp-part-of-firmware">
+<h3><a class="toc-backref" href="#table-of-contents">MTP part of firmware</a><a class="headerlink" href="#mtp-part-of-firmware" title="Permalink to this headline">¶</a></h3>
+<p>The media transfer protocol (MTP) part of firmware presents a board as a memory device,
+and uses the <code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">GiB</span></code> <a class="reference external" href="https://www.winbond.com/resource-files/w25m02gw%20revd%20012219.pdf">W25M02GWTBIG</a> flash memory chip to store the data.
+When the board in the bootloader mode, the MCU LED D1 turns <span class="green">GREEN</span>.
+MTP mode can be activated the board is powered with the <code class="docutils literal notranslate"><span class="pre">T1</span></code> button pressed.
+The <code class="docutils literal notranslate"><span class="pre">T1</span></code> button is connected to <code class="docutils literal notranslate"><span class="pre">SWITCH1</span></code> signal of the <a class="reference external" href="https://www.bosch-sensortec.com/software-tools/tools/application-board-3-0/">Application Board 3.0</a>, which in turn <code class="docutils literal notranslate"><span class="pre">GPIO_33</span></code> of the
+<a class="reference external" href="https://www.u-blox.com/en/product/nina-b30-series-open-cpu-0">NINA-B302</a>, the <code class="docutils literal notranslate"><span class="pre">P1.09</span></code> pin of the <a class="reference external" href="https://www.nordicsemi.com/Products/nRF52840">nRF52840</a>.</p>
+<div class="section" id="activate-mtp-mode">
+<h4><a class="toc-backref" href="#table-of-contents">Activate MTP mode</a><a class="headerlink" href="#activate-mtp-mode" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p>power the board OFF by turning ON/OFF power switch to OFF;</p></li>
+<li><p>press the <code class="docutils literal notranslate"><span class="pre">T1</span></code> button;</p></li>
+<li><p>with the <code class="docutils literal notranslate"><span class="pre">T1</span></code> button pressed, turn the board ON by turning the ON/OFF power switch to ON;</p></li>
+<li><p>observe the <span class="green">GREEN</span> LED turns ON. If the MCU D1 LED does not turn <span class="green">GREEN</span>, this means MTP mode
+is not active, repeat the process.</p></li>
+</ul>
+</div>
+</div>
 </div>
 <div class="section" id="usb-configuration">
 <h2><a class="toc-backref" href="#table-of-contents">USB configuration</a><a class="headerlink" href="#usb-configuration" title="Permalink to this headline">¶</a></h2>
@@ -244,17 +283,56 @@ is not active, repeat the process.</p></li>
 as different device on the USB bus, with different vendor and product IDs.</p>
 <div class="section" id="application-firmware-configuration">
 <h3><a class="toc-backref" href="#table-of-contents">Application firmware configuration</a><a class="headerlink" href="#application-firmware-configuration" title="Permalink to this headline">¶</a></h3>
-<p>In the application mode, the device present itself with “Thesycon Systemsoftware &amp; Consulting GmbH”,
-VID=108c, PID=ab3d, Class=CDC Data, 12M.</p>
+<p>In the application mode, the board present itself as</p>
+<ul class="simple">
+<li><p><strong>“Thesycon Systemsoftware &amp; Consulting GmbH”</strong>, <code class="docutils literal notranslate"><span class="pre">VID=108c</span></code>, <code class="docutils literal notranslate"><span class="pre">PID=ab3d</span></code>, <code class="docutils literal notranslate"><span class="pre">Class=CDC</span> <span class="pre">Data,</span> <span class="pre">12M</span></code>.</p></li>
+</ul>
 </div>
 <div class="section" id="bootloader-firmware-configuration">
 <h3><a class="toc-backref" href="#table-of-contents">Bootloader firmware configuration</a><a class="headerlink" href="#bootloader-firmware-configuration" title="Permalink to this headline">¶</a></h3>
-<p>In the bootloader mode, the device present itself with “Robert Bosch GmbH”,
-VID=152a, PID=80c0, Class=Application Specific Interface, 12M.</p>
+<p>In the bootloader mode, the board present itself as</p>
+<ul class="simple">
+<li><p><strong>“Robert Bosch GmbH”</strong>, <code class="docutils literal notranslate"><span class="pre">VID=152a</span></code>, <code class="docutils literal notranslate"><span class="pre">PID=80c0</span></code>, <code class="docutils literal notranslate"><span class="pre">Class=Application</span> <span class="pre">Specific</span> <span class="pre">Interface,</span> <span class="pre">12M</span></code>.</p></li>
+</ul>
+</div>
+<div class="section" id="mtp-firmware-configuration">
+<h3><a class="toc-backref" href="#table-of-contents">MTP firmware configuration</a><a class="headerlink" href="#mtp-firmware-configuration" title="Permalink to this headline">¶</a></h3>
+<p>In the MTP mode, the board present itself as</p>
+<ul class="simple">
+<li><p><strong>“Robert Bosch GmbH APP3.0 Board(MTP)”</strong>, <code class="docutils literal notranslate"><span class="pre">VID=108c</span></code>, <code class="docutils literal notranslate"><span class="pre">PID=ab3f</span></code>, <code class="docutils literal notranslate"><span class="pre">Class=Vendor</span> <span class="pre">Specific</span> <span class="pre">Class,</span> <span class="pre">12M</span></code>.</p></li>
+</ul>
+</div>
+<div class="section" id="usb-speed">
+<h3><a class="toc-backref" href="#table-of-contents">USB speed</a><a class="headerlink" href="#usb-speed" title="Permalink to this headline">¶</a></h3>
+<p>From the USB configurations above, we see that the application board 3.0
+is the <strong>USB 1.1</strong> <em>full-speed</em> device with maximum signalling rate of <code class="docutils literal notranslate"><span class="pre">12</span> <span class="pre">Mbits/s</span></code>.</p>
+</div>
+</div>
+<div class="section" id="firmware-modes-with-app-switch">
+<h2><a class="toc-backref" href="#table-of-contents">Firmware modes with app_switch</a><a class="headerlink" href="#firmware-modes-with-app-switch" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">app_switch</span></code> tool is a part of the COINES software package.
+The <code class="docutils literal notranslate"><span class="pre">app_switch</span></code> can be used to change the firmware mode from application mode
+to either bootloader or from application to MTP mode.</p>
+<p>Change the mode from application to bootloader:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./app_switch usb_dfu_bl
+</pre></div>
+</div>
+<p>alternatively:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./app_switch 0x0
+</pre></div>
+</div>
+<p>Change the firmware from application to MTP:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./app_switch usb_mtp
+</pre></div>
+</div>
+<p>alternatively:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./app_switch 0x28000
+</pre></div>
 </div>
 </div>
 <div class="section" id="dfu-firmware-update">
 <h2><a class="toc-backref" href="#table-of-contents">DFU firmware update</a><a class="headerlink" href="#dfu-firmware-update" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/USB#Device_Firmware_Upgrade_mechanism">Device Firmware Upgrade</a> (DFU) is a <a class="reference external" href="https://www.usb.org/sites/default/files/DFU_1.1.pdf">USB specification</a></p>
 </div>
 </div>
 
@@ -264,6 +342,7 @@ VID=152a, PID=80c0, Class=Application Specific Interface, 12M.</p>
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="app30_coinespy.html" class="btn btn-neutral float-right" title="Python package coinespy" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
         <a href="app30_debugging.html" class="btn btn-neutral float-left" title="Firmware debugging for Application board 3.0" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
@@ -271,7 +350,7 @@ VID=152a, PID=80c0, Class=Application Specific Interface, 12M.</p>
 
   <div role="contentinfo">
     <p>
-        &#169; Copyright 2022, Dr. Selyunin.
+        &#169; Copyright 2023, Dr. Selyunin.
 
     </p>
   </div> 

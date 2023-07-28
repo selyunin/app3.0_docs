@@ -17,6 +17,8 @@
 
   
   
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  
 
   
   
@@ -89,14 +91,21 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Bosch Application Board 3.0</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#required-equipment">Required equipment</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#application-board-3-0-overview">Application board 3.0 overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#application-board-3-0-hardware-overview">1. Application Board 3.0 hardware overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#hardware-overview">Hardware overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#components">Components</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#software-overview">Software overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#sensor-communication">Sensor communication</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="app30_shuttle_boards.html">Shuttle Boards for BST Board 3.0</a></li>
 <li class="toctree-l1"><a class="reference internal" href="app30_connectors.html">Connector pin-out for Bosch Application Board 3.0</a></li>
 <li class="toctree-l1"><a class="reference internal" href="app30_debugging.html">Firmware debugging for Application board 3.0</a></li>
-<li class="toctree-l1"><a class="reference internal" href="firmware_update.html">Firmware update with DFU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="firmware_update.html">Firmware update</a></li>
+<li class="toctree-l1"><a class="reference internal" href="app30_coinespy.html">Python package <code class="docutils literal notranslate"><span class="pre">coinespy</span></code></a></li>
 </ul>
 
             
@@ -170,19 +179,27 @@
 <li><p><a class="reference internal" href="#bosch-application-board-3-0" id="id1">Bosch Application Board 3.0</a></p>
 <ul>
 <li><p><a class="reference internal" href="#required-equipment" id="id2">Required equipment</a></p></li>
-<li><p><a class="reference internal" href="#application-board-3-0-overview" id="id3">Application board 3.0 overview</a></p></li>
-<li><p><a class="reference internal" href="#application-board-3-0-hardware-overview" id="id4">1. Application Board 3.0 hardware overview</a></p></li>
+<li><p><a class="reference internal" href="#hardware-overview" id="id3">Hardware overview</a></p>
+<ul>
+<li><p><a class="reference internal" href="#components" id="id4">Components</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#software-overview" id="id5">Software overview</a></p>
+<ul>
+<li><p><a class="reference internal" href="#sensor-communication" id="id6">Sensor communication</a></p></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
 </div>
 <p>This is an <strong>unofficial</strong>, <strong>open source</strong>, <strong>community written</strong> documentation
-in order to get started with the <a class="reference external" href="https://www.bosch-sensortec.com/software-tools/tools/application-board-3-0/">Bosch Sensortec Application Board 3.0</a>.
-The board is platform for evaluating the Bosch Sensortec internal sensors,
+to get started with the <a class="reference external" href="https://www.bosch-sensortec.com/software-tools/tools/application-board-3-0/">Bosch Sensortec Application Board 3.0</a>.
+The board is platform for evaluating the Bosch Sensortec sensors
 like IMUs, magnetometers, etc.</p>
 <div class="section" id="required-equipment">
 <h2><a class="toc-backref" href="#table-of-contents">Required equipment</a><a class="headerlink" href="#required-equipment" title="Permalink to this headline">¶</a></h2>
-<p>In order to get started one needs:</p>
+<p>To get started with sensor evaluation one needs:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://www.bosch-sensortec.com/software-tools/tools/application-board-3-0/">Bosch Sensortec Application Board 3.0</a>;</p></li>
 <li><p>Shuttle board (e.g. <a class="reference external" href="https://www.bosch-sensortec.com/media/boschsensortec/downloads/shuttle_board_flyer/application_board_3_1/bst-bmi088-sf000.pdf">BMI088</a>);</p></li>
@@ -190,24 +207,60 @@ like IMUs, magnetometers, etc.</p>
 <li><p>Linux / Windows computer with USB port;</p></li>
 </ul>
 </div>
-<div class="section" id="application-board-3-0-overview">
-<h2><a class="toc-backref" href="#table-of-contents">Application board 3.0 overview</a><a class="headerlink" href="#application-board-3-0-overview" title="Permalink to this headline">¶</a></h2>
-<p>One can conceptually split the communication with a digital sensor (e.g. IMU) into the following phases:
-* initialization phase, where a sensor is configured into an appropriate operation regime,
-* measurement phase, where a sensor provides a digital representation (bit-vector), and
-physical value of interest (e.g. angular velocity) can be restored with a known conversion formula.</p>
-<p>The <a class="reference external" href="https://www.bosch-sensortec.com/software-tools/tools/application-board-3-0/">Bosch Sensortec Application Board 3.0</a> consists of (1) micro-controller (MCU), (2) power circuitry,
-(3) flash memory, and other components which we omit now for clarity.
-Micro-controller communicates with sensors both using SPI and I2C, activates or deactivates the sensor power.</p>
-</div>
-<div class="section" id="application-board-3-0-hardware-overview">
-<h2><a class="toc-backref" href="#table-of-contents">1. Application Board 3.0 hardware overview</a><a class="headerlink" href="#application-board-3-0-hardware-overview" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="hardware-overview">
+<h2><a class="toc-backref" href="#table-of-contents">Hardware overview</a><a class="headerlink" href="#hardware-overview" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference external" href="https://www.bosch-sensortec.com/software-tools/tools/application-board-3-0/">Bosch Sensortec Application Board 3.0</a> consists of:</p>
+<ol class="arabic simple">
+<li><p>micro-controller (MCU),</p></li>
+<li><p>power circuitry which provides either <code class="docutils literal notranslate"><span class="pre">1.8</span> <span class="pre">V</span></code> or <code class="docutils literal notranslate"><span class="pre">2.8</span> <span class="pre">V</span></code> to shuttle boards,</p></li>
+<li><p>flash memory,</p></li>
+<li><p>temperature sensor,</p></li>
+<li><p>charger circuitry,</p></li>
+<li><p>IO: 2 buttons, RGB LED, and connectors:</p></li>
+</ol>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>micro-USB</p></li>
+<li><p>shuttle board connector</p></li>
+<li><p>SWD debugger connector</p></li>
+<li><p>battery connector</p></li>
+</ol>
+</div></blockquote>
+<p>The list above is not exhaustive and we explicitly omit other components for presentation clarity.
+Micro-controller communicates with sensors both using SPI and I2C,
+activates or deactivates the sensor power over GPIO.
+Refer to the <a class="reference external" href="https://www.bosch-sensortec.com/media/boschsensortec/downloads/software_tools/application_board_3_0/app3-0_schematics.pdf">board schematics</a> provided by Bosch as an ultimate reference.</p>
+<div class="section" id="components">
+<h3><a class="toc-backref" href="#table-of-contents">Components</a><a class="headerlink" href="#components" title="Permalink to this headline">¶</a></h3>
 <p>The <a class="reference external" href="https://www.bosch-sensortec.com/software-tools/tools/application-board-3-0/">Bosch Sensortec Application Board 3.0</a> uses the following components:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://www.u-blox.com/en/product/nina-b30-series-open-cpu-0">NINA-B302</a>, a stand-alone Bluetooth 5 low energy module with antenna from <a class="reference external" href="https://www.u-blox.com/en">u-blox</a>.
 The module is a small PCB where the <a class="reference external" href="https://www.nordicsemi.com/Products/nRF52840">nRF52840</a> SoC from <a class="reference external" href="https://www.nordicsemi.com/">Nordic Semiconductor</a> (ARM Cortex M4 MCU + FPU)
 is placed together with antenna, the so-called PIFA, Planar Inverted F-Antenna;</p></li>
+<li><p><a class="reference external" href="https://www.winbond.com/resource-files/w25m02gw%20revd%20012219.pdf">W25M02GWTBIG</a> <code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">GiB</span></code> Flash memory, which is connected to the MCU over Q-SPI,</p></li>
+<li><p><a class="reference external" href="https://www.ti.com/product/en-us/BQ24230/part-details/BQ24230RGTR">BQ24230RGTR</a> Li-ion battery charger IC,</p></li>
+<li><p><a class="reference external" href="https://www.ti.com/product/TMP112-Q1/part-details/TMP112AQDRLRQ1">TMP112AQDRLRQ1</a> temperature sensor connected to the MCU over I2C.</p></li>
 </ul>
+</div>
+</div>
+<div class="section" id="software-overview">
+<h2><a class="toc-backref" href="#table-of-contents">Software overview</a><a class="headerlink" href="#software-overview" title="Permalink to this headline">¶</a></h2>
+<p>To communicate with the board, one needs to:</p>
+<ol class="arabic simple">
+<li><p>flash the board with the appropriate MCU firmware, and</p></li>
+<li><p>use the PC client software to communicate with the board over USB and read the sensor data</p></li>
+<li><p>use Android app to access the board data over Bluetooth</p></li>
+</ol>
+<div class="section" id="sensor-communication">
+<h3><a class="toc-backref" href="#table-of-contents">Sensor communication</a><a class="headerlink" href="#sensor-communication" title="Permalink to this headline">¶</a></h3>
+<p>One can conceptually split the communication with a digital sensor (e.g. IMU) into the following phases:</p>
+<ul class="simple">
+<li><p>initialization phase, where a sensor is configured into an appropriate operation regime,</p></li>
+<li><p>measurement phase, where a sensor provides a digital representation (bit-vector) of a measured physical value.
+Physical value of interest (e.g. angular velocity in degrees per second) can be obtained
+from a bit-vector using a known conversion formula.</p></li>
+</ul>
+</div>
 </div>
 </div>
 
@@ -225,7 +278,7 @@ is placed together with antenna, the so-called PIFA, Planar Inverted F-Antenna;<
 
   <div role="contentinfo">
     <p>
-        &#169; Copyright 2022, Dr. Selyunin.
+        &#169; Copyright 2023, Dr. Selyunin.
 
     </p>
   </div> 
