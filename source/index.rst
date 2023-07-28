@@ -13,6 +13,6 @@ to get started with the `Bosch Sensortec Application Board 3.0`_.
     app30_connectors
     app30_debugging
     firmware_update
-
+    app30_coinespy
 
 .. _Bosch Sensortec Application Board 3.0: https://www.bosch-sensortec.com/software-tools/tools/application-board-3-0/

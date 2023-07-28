@@ -83,9 +83,6 @@ To communicate with the board, one needs to:
 2. use the PC client software to communicate with the board over USB and read the sensor data
 3. use Android app to access the board data over Bluetooth
 
-
-
-
 ~~~~~~~~~~~~~~~~~~~~~~
 Sensor communication
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -97,9 +94,6 @@ One can conceptually split the communication with a digital sensor (e.g. IMU) in
 * measurement phase, where a sensor provides a digital representation (bit-vector) of a measured physical value.
   Physical value of interest (e.g. angular velocity in degrees per second) can be obtained
   from a bit-vector using a known conversion formula.
-
-
-
 
 
 

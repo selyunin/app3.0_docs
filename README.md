@@ -50,7 +50,7 @@ Go to the `localhost:8080` in browser and read the pages.
 
 ## Maintainer
 
-[Dr. Konstantin Selyunin](http://selyunin.com/), 
+[Dr. Konstantin Selyunin](https://selyunin.github.io/), 
 for suggestions / questions / comments 
 please contact: 
 selyunin [dot] k [dot] v [at] gmail [dot] com
